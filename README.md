@@ -1,2 +1,2 @@
 # braintree-validation
-An adapter for the jQuery validation plugin to process Braintree hosted fields
+An unofficial adapter for [the jQuery validation plugin](https://github.com/jquery-validation/jquery-validation) to process [Braintree hosted fields](https://developers.braintreepayments.com/guides/hosted-fields/overview/javascript/v3)
