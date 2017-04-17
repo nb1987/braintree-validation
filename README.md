@@ -13,7 +13,7 @@ If you have very particular validation requirements and want to get your hands d
 
 ### Including it on your page
 
-1. Include jQuery, the jQuery validation plugin, the Braintree SDK's client component, and Braintee SDK's hosted-fields component on a page. 
+1. Include jQuery, the jQuery validation plugin, the Braintree SDK's client component, the Braintee SDK's hosted-fields component, and braintree-validation on a page. 
 2. Create a Braintree `client` instance.
 3. Create a Braintree `HostedFields` instance. 
 4. On the `braintree.hostedFields` object, call the `validate()` method, passing to it the Braintree `HostedFields` instance and any options you would pass to the jQuery validation plugin.
@@ -32,6 +32,7 @@ A bare-bones example:
 	<script src="jquery.validate.js"></script>
 	<script src="https://js.braintreegateway.com/web/3.12.1/js/client.js"></script>
 	<script src="https://js.braintreegateway.com/web/3.12.1/js/hosted-fields.js"></script>
+	<script src="https://raw.githubusercontent.com/nb1987/braintree-validation/master/src/core.js"></script>
 	<script>
 		braintree.client.create({
 			authorization: 'YOUR_AUTHORIZATION_KEY_HERE'
