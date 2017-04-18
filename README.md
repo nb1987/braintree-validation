@@ -5,6 +5,8 @@ Braintree's `HostedFields` enable you to easily achieve Payment Card Industry Da
 
 If you have very particular validation requirements and want to get your hands dirty, the library also provides convenience methods for retrieving the Braintree field name (or Braintree field) from the `<iframe>`. See details in the Documentation section.
 
+Check it out in action: https://codepen.io/nb1987/pen/qmOqpX
+
 ## Getting Started
 
 ### Downloading the prebuilt files
@@ -59,7 +61,7 @@ A bare-bones example:
 
 ### Overview 
 
-The most important thing to be aware of is that many `options` for `$.validate()` accept callbacks, and those callbacks often contain as a parameter the `element` being validated. In the case of Braintree hosted fields, this element is _not_ the hosted field, but instead the `<iframe>` that contains the hosted field. This library contains two convenience methods for retrieving either the Braintree `HostedField` object related to the containing `<iframe>` or the name of that property.
+The most important thing to be aware of is that many `options` for `$.validate()` accept callbacks, and those callbacks often contain as a parameter the `element` being validated. In the case of Braintree hosted fields, this element is _not_ the hosted field, but instead the `<iframe>` that contains the hosted field. This library exposes two of its own convenience methods for retrieving either the Braintree `HostedField` object related to the containing `<iframe>` or the name of that property.
 
 ### `rules` and `messages` 
 

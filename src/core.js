@@ -6,12 +6,12 @@
  * Copyright (c) 2017 Nick Bagnall
  * Released under the MIT license
  */
- 
+
 (function(factory) {
 	if (typeof define === 'function' && define.amd ) {
-		define( ['braintree', 'jquery'], factory );
+		define( ['braintree-web', 'jquery-validation'], factory );
 	} else if (typeof module === 'object' && module.exports) {
-		module.exports = factory(require('braintree'), require('jquery'));
+		module.exports = factory(require('braintree-web'), require('jquery-validation'));
 	} else {
 		factory(braintree, jQuery);
 	}
@@ -25,6 +25,10 @@
 	 * @returns {String} identifying the name of the field corresponding to the passed-in frameElement 
 	 */
 	function getFieldNameFromFrameElement(frameElement) {
+		if (hostedFieldsInstanceRef === undefined) {
+			console.error('You cannot call getFieldNameFromFrameElement() without first calling validate() on the braintree.hostedFields!');
+			return;
+		}
 		for (field in hostedFieldsInstanceRef._fields) {
 			if (hostedFieldsInstanceRef._fields[field].frameElement === frameElement) {
 				return field;
@@ -40,6 +44,10 @@
 	 * @returns {braintree.HostedField} corresponding to the passed-in frameElement 
 	 */
 	function getFieldFromFrameElement(frameElement) {
+		if (hostedFieldsInstanceRef === undefined) {
+			console.error('You cannot call getFieldFromFrameElement() without first calling validate() on the braintree.hostedFields!');
+			return;
+		}
 		return hostedFieldsInstanceRef._state.fields[getFieldNameFromFrameElement(frameElement)];
 	}
 	
@@ -51,7 +59,7 @@
 		* @see {@link https://jqueryvalidation.org/rules/} for futher information
 		* @param {String} command - if not reading rules, then command to add or remove (valid options are 'add' and 'remove')
 		* @param {Object} argument - the rules to add (if command parameter is 'add') or remove (if the command parameter is 'remove')
-		@returns {Object} indicating whether the form containing the hosted fields is valid or not 
+		* @returns {Object} indicating whether the form containing the hosted fields is valid or not 
 	*/
 	braintree.hostedFields.rules = function(command, argument) {
 		if (hostedFieldsInstanceRef === undefined) {
@@ -59,7 +67,7 @@
 			return;
 		}
 
-		var form = $(hostedFieldsInstance._fields[Object.keys(hostedFieldsInstance._fields)[0]].containerElement).closest('form');
+		var form = $(hostedFieldsInstanceRef._fields[Object.keys(hostedFieldsInstanceRef._fields)[0]].containerElement).closest('form');
 
 		if (command) {
 			switch (command) {
@@ -79,7 +87,7 @@
 		* A 'wrapper' method that checks validity of the form containing the hosted fields by simply invoking 
 		  jQuery validation plugin's own valid() method
 		* @see {@link https://jqueryvalidation.org/valid/} for futher information
-		@returns {Boolean} indicating whether the form containing the hosted fields is valid or not 
+		* @returns {Boolean} indicating whether the form containing the hosted fields is valid or not 
 	*/
 	braintree.hostedFields.valid = function() {
 		if (hostedFieldsInstanceRef === undefined) {
@@ -87,9 +95,10 @@
 			return;
 		}
 		
-		var form = $(hostedFieldsInstance._fields[Object.keys(hostedFieldsInstance._fields)[0]].containerElement).closest('form');
+		var form = $(hostedFieldsInstanceRef._fields[Object.keys(hostedFieldsInstanceRef._fields)[0]].containerElement).closest('form');
 		return $(form).valid();
 	}
+
 
 	/**
 	 * Imbues Braintree hosted fields instance with validation (via jQuery Validation plugin) and returns a $.validator 
@@ -104,8 +113,13 @@
 	braintree.hostedFields.validate = function(hostedFieldsInstance, options) {
 
 		// warn and exit if can't find jQuery and/or jQuery validator libraries 
-		if (jQuery === undefined && jquery === undefined && $ === undefined) {
-			console.warn('Could not find jQuery global object');
+		if (typeof $ === 'undefined') {
+			console.error('No jQuery object is defined!');
+			return;
+		}
+		
+		if (typeof $.validator === 'undefined') {
+			console.error('jQuery Validation plugin not found!');
 			return;
 		}
 		
@@ -150,7 +164,7 @@
 				return getFieldFromFrameElement(frameElement).isValid;
 			});
 			if (frameElementName in rules) {
-				if (options.debug) console.warn('You are overriding braintree-validation.js\'s default validation rules for the ' + 
+				if (options.debug) console.warn('You are overriding braintree-validation\'s default validation rules for the ' + 
 					fieldDescriptionMap[field] + '. Please refer to the library\'s GitHub documentation if you have not already done so.');
 			} else {
 				rules[frameElementName] = {};
@@ -158,7 +172,7 @@
 				rules[frameElementName][frameElementName + '-isValid'] = true;
 			}
 			if (frameElementName in messages) {
-				if (options.debug) console.warn('You are overriding braintree-validation.js\'s default error messages for the ' + 
+				if (options.debug) console.warn('You are overriding braintree-validation\'s default error messages for the ' + 
 					fieldDescriptionMap[field] + '. Please refer to the library\'s GitHub documentation if you have not already done so.');
 			} else {
 				messages[frameElementName] = {};
@@ -205,7 +219,7 @@
 				}
 			};
 		} else if (options.debug) {
-			console.warn('You are overriding braintree-validation.js\'s default implementation of errorPlacement(). Please refer to the library\'s GitHub documentation if you have not already done so.');
+			console.warn('You are overriding braintree-validation\'s default implementation of errorPlacement(). Please refer to the library\'s GitHub documentation if you have not already done so.');
 		}		
 		var validator = form.validate(options);
 		var defaultHighlightFn = validator.settings.highlight,
@@ -233,7 +247,7 @@
 				}
 			}
 		} else if (options.debug) {
-			console.warn('You are overriding braintree-validation.js\'s default implementation of highlight(). Please refer to the library\'s GitHub documentation if you have not already done so.');
+			console.warn('You are overriding braintree-validation\'s default implementation of highlight(). Please refer to the library\'s GitHub documentation if you have not already done so.');
 		}
 		if (!options.unhighlight) {
 			validator.settings.unhighlight = function(element, errorClass, validClass) {
@@ -250,7 +264,7 @@
 				}
 			}
 		} else if (options.debug) {
-			console.warn('You are overriding braintree-validation.js\'s default implementation of unhighlight(). Please refer to the library\'s GitHub documentation if you have not already done so.');
+			console.warn('You are overriding braintree-validation\'s default implementation of unhighlight(). Please refer to the library\'s GitHub documentation if you have not already done so.');
 		}
 		
 		// override the default implementation of required() so that eager validation works even pre-submiss
