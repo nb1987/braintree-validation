@@ -53,6 +53,10 @@ A bare-bones example:
 	</script>
 ```
 
+You can also download braintree-validation as a package from npm and use a module bundler (like Browserify or Webpack) to include it in your script:
+
+`npm install braintree-validation`
+
 ### Running the demo 
 
 ## Documentation 
