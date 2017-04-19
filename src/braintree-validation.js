@@ -106,9 +106,6 @@
 	 * @param {HostedFields} hostedFieldsInstance - the Braintree hosted fields instance to validate
 	 * @param {Object} options - the jQuery Validation plugin options (see https://jqueryvalidation.org/validate/)
 	 * @returns {$.validator} - a validator for the form (see https://jqueryvalidation.org/category/validator/)
-	 * @requires module:xyzcorp/helper
-	 * @listens 
-	 * @fires <className>#[event:]<eventName>
 	 */
 	hostedFields.validate = function(hostedFieldsInstance, options) {
 
