@@ -1,7 +1,5 @@
 # braintree-validation
-An unofficial adapter for [the jQuery validation plugin](https://github.com/jquery-validation/jquery-validation) to process [Braintree hosted fields](https://developers.braintreepayments.com/guides/hosted-fields/overview/javascript/v3)
-
-Braintree's `HostedFields` enable you to easily achieve Payment Card Industry Data Security Standard (PCI DSS) compliance. One disadvantage, though, is that front-end validation libraries won't work with `HostedFields`, forcing you to roll your own validation using the Braintree JavaScript SDK. That's where braintree-validation comes in: it's an adapter enabling use of the venerable jQuery Validation plugin on the `<form>` containing your hosted fields. braintree-validation is also not limited to `HostedFields`; all other fields in your form will be validated as though you had normally applied the jQuery validation plugin.
+[Braintree's `HostedFields`](https://developers.braintreepayments.com/guides/hosted-fields/overview/javascript/v3) enable you to easily achieve Payment Card Industry Data Security Standard (PCI DSS) compliance. One disadvantage, though, is that front-end validation libraries won't work with `HostedFields`, forcing you to roll your own validation using the Braintree JavaScript SDK. That's where braintree-validation comes in: it's an adapter enabling use of the venerable [jQuery Validation plugin](https://github.com/jquery-validation/jquery-validation) on the `<form>` containing your hosted fields. braintree-validation is also not limited to `HostedFields`; all other fields in your form will be validated as though you had normally applied the jQuery validation plugin.
 
 Check it out in action at https://codepen.io/nb1987/pen/qmOqpX
 
