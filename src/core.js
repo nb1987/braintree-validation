@@ -7,15 +7,15 @@
  * Released under the MIT license
  */
 
-(function(factory) {
+(function(root, factory) {
 	if (typeof define === 'function' && define.amd ) {
-		define( ['braintree-web', 'jquery-validation'], factory );
+		define(['hosted-fields', 'jquery.validate'], factory );
 	} else if (typeof module === 'object' && module.exports) {
-		module.exports = factory(require('braintree-web'), require('jquery-validation'));
+		module.exports = factory(require('braintree-web/hosted-fields'), require('jquery-validation'));
 	} else {
-		factory(braintree, jQuery);
+		factory(root.braintree.hostedFields, root.jQuery);
 	}
-}(function(braintree, $) {
+}(this, function(hostedFields, $) {
 
 	var hostedFieldsInstanceRef;
 
@@ -36,7 +36,7 @@
 		}
 	}
 	
-	braintree.hostedFields.getFieldNameFromFrameElement = getFieldNameFromFrameElement;
+	hostedFields.getFieldNameFromFrameElement = getFieldNameFromFrameElement;
 	
 	/**
 	 * Returns a braintree.HostedField instance that corresponds to the passed-in frameElement
@@ -51,7 +51,7 @@
 		return hostedFieldsInstanceRef._state.fields[getFieldNameFromFrameElement(frameElement)];
 	}
 	
-	braintree.hostedFields.getFieldFromFrameElement = getFieldFromFrameElement;
+	hostedFields.getFieldFromFrameElement = getFieldFromFrameElement;
 	
 	/**
 		* A 'wrapper' method that reads, adds to, or removes rules from the form containing the hosted fields by simply invoking 
@@ -61,7 +61,7 @@
 		* @param {Object} argument - the rules to add (if command parameter is 'add') or remove (if the command parameter is 'remove')
 		* @returns {Object} indicating whether the form containing the hosted fields is valid or not 
 	*/
-	braintree.hostedFields.rules = function(command, argument) {
+	hostedFields.rules = function(command, argument) {
 		if (hostedFieldsInstanceRef === undefined) {
 			console.error('You cannot call rules() without first calling validate() on the braintree.hostedFields!');
 			return;
@@ -89,7 +89,7 @@
 		* @see {@link https://jqueryvalidation.org/valid/} for futher information
 		* @returns {Boolean} indicating whether the form containing the hosted fields is valid or not 
 	*/
-	braintree.hostedFields.valid = function() {
+	hostedFields.valid = function() {
 		if (hostedFieldsInstanceRef === undefined) {
 			console.error('You cannot call valid() without first calling validate() on the braintree.hostedFields!');
 			return;
@@ -110,7 +110,7 @@
 	 * @listens 
 	 * @fires <className>#[event:]<eventName>
 	 */
-	braintree.hostedFields.validate = function(hostedFieldsInstance, options) {
+	hostedFields.validate = function(hostedFieldsInstance, options) {
 
 		// warn and exit if can't find jQuery and/or jQuery validator libraries 
 		if (typeof $ === 'undefined') {
@@ -267,7 +267,7 @@
 			console.warn('You are overriding braintree-validation\'s default implementation of unhighlight(). Please refer to the library\'s GitHub documentation if you have not already done so.');
 		}
 		
-		// override the default implementation of required() so that eager validation works even pre-submiss
+		// override the default implementation of required() so that eager validation works even pre-submission
 		$.validator.addMethod('required', function(value, element, param) {
 			var braintreeField = getFieldFromFrameElement(element);
 			if (braintreeField !== undefined) {
@@ -298,5 +298,6 @@
 		
 		return validator;
 	};
-
+	
+	return hostedFields;
 }));
