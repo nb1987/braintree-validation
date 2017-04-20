@@ -53,9 +53,12 @@ A bare-bones example:
 	</script>
 ```
 
-You can also download braintree-validation as a package from npm and use a module bundler (like Browserify or Webpack) to include it in your script:
+braintree-validation is also available on the npm and bower registries:
 
-`npm install braintree-validation`
+npm: `npm install braintree-validation`
+bower: `bower install braintree-validation`
+
+braintree-validation supports both CommonJS-style and AMD-style module imports. 
 
 ### Running the demo 
 
