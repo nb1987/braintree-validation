@@ -1,0 +1,35 @@
+{
+	"name": "braintree-validation",
+	"homepage": "https://github.com/nb1987/braintree-validation",
+	"repository": {
+		"type": "git",
+		"url": "git://github.com/nb1987/braintree-validation.git"
+	},
+	"authors": [
+		"Nick Bagnall <nbagnall@gmail.com>"
+	],
+	"moduleType": ["globals", "amd", "node"],
+	"description": "An unofficial adapter enabling the jQuery Validation plugin to process Braintree hosted fields",
+	"main": "dist/braintree-validation.min.js",
+	"keywords": [
+		"braintree",
+		"jquery-validate",
+		"jquery-validation",
+		"forms",
+		"validation",
+		"validate"
+	],
+	"license": "MIT",
+	"ignore": [
+		"**/.*",
+		"node_modules",
+		"bower_components",
+		"test",
+		"demo",
+		"lib"
+	],
+	"dependencies": {
+		"braintree-web": ">= 3.2.0",
+		"jquery-validation": ">= 1.15.1"
+	}
+}
