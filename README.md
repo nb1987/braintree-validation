@@ -7,7 +7,7 @@ Note: If you have very particular validation requirements and want to get your h
 
 ## Getting Started
 
-### Downloading the prebuilt files
+### Downloading the prebuilt files	
 
 ### Downloading the latest changes
 
@@ -66,7 +66,20 @@ braintree-validation supports both CommonJS-style and AMD-style module imports.
 
 ### Overview 
 
-The most important thing to be aware of is that many `options` for `$.validate()` accept callbacks, and those callbacks often contain as a parameter the `element` being validated. In the case of Braintree hosted fields, this element is _not_ the hosted field, but instead the `<iframe>` that contains the hosted field. This library exposes two of its own convenience methods for retrieving either the Braintree `HostedField` object related to the containing `<iframe>` or the name of that property.
+Beyond setup (documented in the Getting Started section), the most important thing to be aware of is that many `options` for `$.validate()` accept callbacks, and those callbacks often contain as a parameter the `element` being validated. In the case of Braintree hosted fields, this element is _not_ the hosted field, but instead the `<iframe>` that contains the hosted field. This library exposes two of its own convenience methods for retrieving either the Braintree `HostedField` object related to the containing `<iframe>` or the name of that property.
+
+### The braintree-validation API
+
+braintree-validation exposes all of the same methods that the jQuery Validation plugin does, except that they're properties on the `braintree.hostedFields` object rather than the jQuery object:
+
+`validate(hostedFields, [options])` - this validates the form and must be called before any other method can be called. This differs from the jQuery Validation plugin's corresponding method in that it requires the first argument passed in to be the `hostedFields` instance.
+`valid()` - this returns `true` or `false` indicating whether the form is valid or not.
+`rules()` - reads, adds, or removes rules for an element; see also https://jqueryvalidation.org/rules/ for `rules()` and its two overloads.
+
+braintree-validation additionally exposes two of its own convenience functions which allow you to retrieve a Braintree hosted field object from the `<iframe>` element that contains it:
+
+`getFieldNameFromFrameElement(frameElement)` - returns the name of the hosted field for the given `frameElement`
+`getFieldFromFrameElement(frameElement)` - returns the actual hosted field object for the given `frameElement`
 
 ### `rules` and `messages` 
 
@@ -122,6 +135,7 @@ messages: {
 You can override these as desired by passing into the `options` your own rule(s) and/or message(s) of the same name(s).
 
 ### Overrides 
+
 
 
 ## License
