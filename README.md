@@ -73,6 +73,7 @@ Beyond setup (documented in the Getting Started section), the most important thi
 braintree-validation exposes all of the same methods that the jQuery Validation plugin does, except that they're properties on the `braintree.hostedFields` object rather than the jQuery object:
 
 `validate(hostedFields, [options])` - this validates the form and must be called before any other method can be called. This differs from the jQuery Validation plugin's corresponding method in that it requires the first argument passed in to be the `hostedFields` instance.
+
 `valid()` - this returns `true` or `false` indicating whether the form is valid or not.
 
 `rules()` - reads, adds, or removes rules for an element; see also https://jqueryvalidation.org/rules/ for `rules()` and its two overloads.
