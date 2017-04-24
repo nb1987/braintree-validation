@@ -55,8 +55,8 @@ A bare-bones example (which assumes you have the jquery, jquery.validate, and br
 
 braintree-validation is also available on the npm and bower registries:
 
-npm: `npm install braintree-validation`
-bower: `bower install braintree-validation`
+* npm: `npm install braintree-validation`
+* bower: `bower install braintree-validation`
 
 braintree-validation supports both CommonJS-style and AMD-style module imports. 
 
@@ -137,13 +137,13 @@ You can override these as desired by passing into the `options` your own rule(s)
 ### Overrides 
 
 #### `options.highlight` and `options.unhighlight`
-So that hosted fields function identically to other fields, the braintree-validation library modifies the jQuery Validation plugin's default implementations of `options.highlight` and `options.unhighlight`. You may override these with your own implementation(s), but if `options.debug` is `true` you will receive a warning in the console. If you choose to override, it is advisable to reference the source code file to see the braintree-validation library's implementation. 
+So that hosted fields function identically to other fields, the braintree-validation library modifies the jQuery Validation plugin's default implementations of `options.highlight` and `options.unhighlight`. You may override these with your own implementation(s); if you do so and `options.debug` is `true` you will receive a warning in the console. If you choose to override, it is advisable to reference the source code file to see the braintree-validation library's implementation. 
 
 #### The `required` rule
 braintree-validation also overrides the default implementation of the `required` rule. This override is necessary for enabling hosted fields to be eagerly validated before the initial submission attempt. If you choose to override with your own implementation of `required`, it is advisable to reference the source code file to see the braintree-validation library's implementation. 
 
 #### Pseudo-selectors
-The jQuery Validtion plugin adds in a few custom pseudo-selectors: `:blank`, `:filled`, and `:unchecked`. braintree-validation modifies the first two so that the corresponding `<iframe>` of any blank hosted field will be included in `:blank` and so that the corresponding `<iframe>` of any filled hosted field will be included in `:filled`.
+The jQuery Validation plugin adds in a few custom pseudo-selectors: `:blank`, `:filled`, and `:unchecked`. braintree-validation modifies the first two so that the corresponding `<iframe>` of any blank hosted field will be included in `:blank` and so that the corresponding `<iframe>` of any filled hosted field will be included in `:filled`.
 
 #### `options.ignore`
 If you add `iframe` to `options.ignore`, braintree-validation will remove `iframe` from `options.ignore`. If `options.debug` is `true`, you'll receive a warning in the console informing you that this is being done.
