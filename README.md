@@ -18,7 +18,7 @@ Note: If you have very particular validation requirements and want to get your h
 3. Create a Braintree `HostedFields` instance. 
 4. On the `braintree.hostedFields` object, call the `validate()` method, passing to it the Braintree `HostedFields` instance and any options you would pass to the jQuery validation plugin.
 
-A bare-bones example:
+A bare-bones example (which assumes you have the jquery, jquery.validate, and braintree-validation libraries downloaded locally in the same folder):
 
 ```javascript
 	<form>
@@ -32,7 +32,7 @@ A bare-bones example:
 	<script src="jquery.validate.js"></script>
 	<script src="https://js.braintreegateway.com/web/3.12.1/js/client.js"></script>
 	<script src="https://js.braintreegateway.com/web/3.12.1/js/hosted-fields.js"></script>
-	<script src="https://raw.githubusercontent.com/nb1987/braintree-validation/master/src/core.js"></script>
+	<script src="braintree-validation.js"></script>
 	<script>
 		braintree.client.create({
 			authorization: 'YOUR_AUTHORIZATION_KEY_HERE'
@@ -66,7 +66,7 @@ braintree-validation supports both CommonJS-style and AMD-style module imports.
 
 ### Overview 
 
-Beyond setup (documented in the Getting Started section), the most important thing to be aware of is that many `options` for `$.validate()` accept callbacks, and those callbacks often contain as a parameter the `element` being validated. In the case of Braintree hosted fields, this element is _not_ the hosted field, but instead the `<iframe>` that contains the hosted field. This library exposes two of its own convenience methods for retrieving either the Braintree `HostedField` object related to the containing `<iframe>` or the name of that property.
+Beyond setup (documented in the Getting Started section), the most important thing to be aware of is that many `options` for `validate()` accept callbacks, and those callbacks often contain as a parameter the `element` being validated. In the case of Braintree hosted fields, this element is _not_ the hosted field, but instead the `<iframe>` that contains the hosted field. This library exposes two of its own convenience methods for retrieving either the Braintree `HostedField` object related to the containing `<iframe>` or the name of that property.
 
 ### The braintree-validation API
 
@@ -136,6 +136,17 @@ You can override these as desired by passing into the `options` your own rule(s)
 
 ### Overrides 
 
+#### `options.highlight` and `options.unhighlight`
+So that hosted fields function identically to other fields, the braintree-validation library modifies the jQuery Validation plugin's default implementations of `options.highlight` and `options.unhighlight`. You may override these with your own implementation(s), but if `options.debug` is `true` you will receive a warning in the console. If you choose to override, it is advisable to reference the source code file to see the braintree-validation library's implementation. 
+
+#### The `required` rule
+braintree-validation also overrides the default implementation of the `required` rule. This override is necessary for enabling hosted fields to be eagerly validated before the initial submission attempt. If you choose to override with your own implementation of `required`, it is advisable to reference the source code file to see the braintree-validation library's implementation. 
+
+#### Pseudo-selectors
+The jQuery Validtion plugin adds in a few custom pseudo-selectors: `:blank`, `:filled`, and `:unchecked`. braintree-validation modifies the first two so that the corresponding `<iframe>` of any blank hosted field will be included in `:blank` and so that the corresponding `<iframe>` of any filled hosted field will be included in `:filled`.
+
+#### `options.ignore`
+If you add `iframe` to `options.ignore`, braintree-validation will remove `iframe` from `options.ignore`. If `options.debug` is `true`, you'll receive a warning in the console informing you that this is being done.
 
 
 ## License
