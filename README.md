@@ -18,7 +18,7 @@ Note: If you have very particular validation requirements and want to get your h
 3. Create a Braintree `HostedFields` instance. 
 4. On the `braintree.hostedFields` object, call the `validate()` method, passing to it the Braintree `HostedFields` instance and any options you would pass to the jQuery validation plugin.
 
-A bare-bones example (which assumes you have the jquery, jquery.validate, and braintree-validation libraries downloaded locally in the same folder):
+A bare-bones example:
 
 ```javascript
 	<form>
@@ -28,11 +28,11 @@ A bare-bones example (which assumes you have the jquery, jquery.validate, and br
 		<div class="form-control" id="expiration-year"></div>
 		<div class="form-control" id="postal-code"></div>
 	</form>
-	<script src="jquery.js"></script>
-	<script src="jquery.validate.js"></script>
+	<script src="https://cdn.jsdelivr.net/jquery/3.2.1/jquery.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
 	<script src="https://js.braintreegateway.com/web/3.12.1/js/client.js"></script>
 	<script src="https://js.braintreegateway.com/web/3.12.1/js/hosted-fields.js"></script>
-	<script src="braintree-validation.js"></script>
+	<script src="https://cdn.jsdelivr.net/braintree-validation/1.0.0/braintree-validation.min.js"></script>
 	<script>
 		braintree.client.create({
 			authorization: 'YOUR_AUTHORIZATION_KEY_HERE'
