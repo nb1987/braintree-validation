@@ -1,0 +1,148 @@
+<!doctype html>
+<html>
+<head>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+	<link rel="stylesheet" href="./css/style.css" />
+</head>
+<body>
+<div class="panel panel-default bootstrap-basic">
+	<div class="panel-heading">
+		<h3 class="panel-title">Payment Form</h3>
+	</div>
+	<form id="cc-form" class="panel-body">
+		<div class="row">
+			<div class="form-group col-xs-4">
+				<label class="control-label">Email</label>
+				<input class="form-control" type="email" required="true" name="email" />
+				<span class="helper-text"></span>
+			</div>
+			<div class="form-group col-xs-4">
+				<label class="control-label">First Name</label>
+				<input name="first-name" class="form-control" />
+				<span class="helper-text"></span>
+			</div>
+			<div class="form-group col-xs-4">
+				<label class="control-label">Last Name</label>
+				<input required="true" name="last-name" class="form-control" />
+				<span class="helper-text"></span>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="form-group col-xs-8">
+				<label class="control-label">Card Number</label>
+				<!--  Hosted Fields div container -->
+				<div class="form-control" id="card-number"></div>
+				<span class="helper-text"></span>
+			</div>
+			<div class="form-group col-xs-4">
+				<div class="row">
+					<label class="control-label col-xs-12">Expiration Date</label>
+					<div class="col-xs-6">
+						<!--  Hosted Fields div container -->
+						<div class="form-control" id="expiration-month"></div>
+					</div>
+					<div class="col-xs-6">
+						<!--  Hosted Fields div container -->
+						<div class="form-control" id="expiration-year"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<div class="row">
+			<div class="form-group col-xs-6">
+				<label class="control-label">Security Code</label>
+				<!--  Hosted Fields div container -->
+				<div class="form-control" id="cvv"></div>
+			</div>
+			<div class="form-group col-xs-6">
+				<label class="control-label">Zipcode</label>
+				<!--  Hosted Fields div container -->
+				<div class="form-control" id="postal-code"></div>
+			</div>
+		</div>
+
+		<br />
+		<button value="submit" id="submit" class="btn btn-success btn-lg center-block">Pay with <span id="card-type">Card</span></button>
+		<button id="reset">Reset</button>
+		<button id="invalids">Log Invalids</button>
+	</form>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.16.0/jquery.validate.js"></script>
+<script src="https://js.braintreegateway.com/web/3.12.1/js/client.js"></script>
+<script src="https://js.braintreegateway.com/web/3.12.1/js/hosted-fields.js"></script>
+<script src="https://cdn.jsdelivr.net/braintree-validation/1.0.0/braintree-validation.js"></script>
+<script>
+	braintree.client.create({
+		authorization: 'sandbox_g42y39zw_348pk9cgf3bgyw2b'
+	}, function (err, clientInstance) {
+		if (err) {
+			console.error(err);
+			return;
+		}
+
+		braintree.hostedFields.create({
+			client: clientInstance,
+			styles: {
+				'input': {
+					'font-size': '14px',
+					'font-family': 'helvetica, tahoma, calibri, sans-serif',
+					'color': '#3a3a3a'
+				},
+				':focus': {
+					'color': 'black'
+				},
+				'.error': {
+					'color': 'red'
+				},
+				'.valid': {
+					'color': 'green'
+				}
+			},
+			fields: {
+				number: {
+					selector: '#card-number',
+					placeholder: '4111 1111 1111 1111'
+				},
+				cvv: {
+					selector: '#cvv',
+					placeholder: '123'
+				},
+				expirationMonth: {
+					selector: '#expiration-month',
+					placeholder: 'MM'
+				},
+				expirationYear: {
+					selector: '#expiration-year',
+					placeholder: 'YY'
+				},
+				postalCode: {
+					selector: '#postal-code',
+					placeholder: '90210'
+				}
+			}
+		}, function (err, hostedFieldsInstance) {
+			if (err) {
+				console.error(err);
+				return;
+			}
+
+			var options = {
+				submitHandler: function(form) {
+					alert('Braintree phone home! (NB: This is where you might call tokenize() if you are not already doing that elsewhere in your code.)');
+				},
+				success: function(label) {
+					label.addClass('valid').text('Ok!');
+				},
+				debug: true
+			};
+
+			var validator = braintree.hostedFields.validate(hostedFieldsInstance, options);
+		});
+	});
+</script>
+</body>
+</html>

@@ -1,0 +1,82 @@
+<!doctype html>
+<html>
+<head>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+	<link rel="stylesheet" href="./css/style.css" />
+</head>
+<body>
+<div class="panel panel-default bootstrap-basic">
+	<div class="panel-heading">
+		<h3 class="panel-title">Payment Form</h3>
+	</div>
+	<form id="cc-form" class="panel-body">
+		<div class="row">
+			<div class="form-group col-xs-4">
+				<label class="control-label">Email</label>
+				<input class="form-control" type="email" required="true" name="email" />
+				<span class="helper-text"></span>
+			</div>
+			<div class="form-group col-xs-4">
+				<label class="control-label">First Name</label>
+				<input name="first-name" class="form-control" />
+				<span class="helper-text"></span>
+			</div>
+			<div class="form-group col-xs-4">
+				<label class="control-label">Last Name</label>
+				<input name="last-name" class="form-control" />
+				<span class="helper-text"></span>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="form-group col-xs-8">
+				<label class="control-label">Card Number</label>
+				<!--  Hosted Fields div container -->
+				<div class="form-control" id="card-number"></div>
+				<span class="helper-text"></span>
+			</div>
+			<div class="form-group col-xs-4">
+				<div class="row">
+					<label class="control-label col-xs-12">Expiration Date</label>
+					<div class="col-xs-6">
+						<!--  Hosted Fields div container -->
+						<div class="form-control" id="expiration-month"></div>
+					</div>
+					<div class="col-xs-6">
+						<!--  Hosted Fields div container -->
+						<div class="form-control" id="expiration-year"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<div class="row">
+			<div class="form-group col-xs-6">
+				<label class="control-label">Security Code</label>
+				<!--  Hosted Fields div container -->
+				<div class="form-control" id="cvv"></div>
+			</div>
+			<div class="form-group col-xs-6">
+				<label class="control-label">Zipcode</label>
+				<!--  Hosted Fields div container -->
+				<div class="form-control" id="postal-code"></div>
+			</div>
+		</div>
+
+		<br />
+		<button value="submit" id="submit" class="btn btn-success btn-lg center-block">Pay with <span id="card-type">Card</span></button>
+	</form>
+</div>
+
+<!--  	Instead of using a module bundler like Browserify or Webpack, you could also import the 
+		braintree-validation library (plus its dependencies) the old-fashioned way.					-->
+<!--
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.16.0/jquery.validate.js"></script>
+<script src="https://js.braintreegateway.com/web/3.12.1/js/client.js"></script>
+<script src="https://js.braintreegateway.com/web/3.12.1/js/hosted-fields.js"></script>
+<script src="https://cdn.jsdelivr.net/jquery/3.2.1/braintree-validation.js"></script>
+-->
+<script src="./bundle.js"></script>
+</body>
+</html>
