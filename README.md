@@ -58,9 +58,16 @@ braintree-validation is also available on the npm and bower registries:
 * npm: `npm install braintree-validation`
 * bower: `bower install braintree-validation`
 
-braintree-validation supports both CommonJS-style and AMD-style module imports. 
+braintree-validation supports both CommonJS-style and AMD-style module imports. Use of both is demonstrated in the demo.
 
 ### Running the demo 
+
+The demo is very simple to run. Follow the steps below:
+1. Open your preferred command-line interface (CLI).
+2. Change directory to `$/demo` ($ represents root of the repository clone)
+3. Install the dev dependencies: `npm install`
+4. Fire up the node `http-server`: `node ./node_modules/http-server/bin/http-server .`
+5. Open your web browser to 127.0.0.1:8080/index.html for a demo using globals, to 127.0.0.1:8080/amd.html for a demo using AMD, and 127.0.0.1:8080/commonjs.html for a demo using CommonJS
 
 ## Documentation 
 
