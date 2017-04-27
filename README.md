@@ -155,6 +155,28 @@ The jQuery Validation plugin adds in a few custom pseudo-selectors: `:blank`, `:
 #### `options.ignore`
 If you add `iframe` to `options.ignore`, braintree-validation will remove `iframe` from `options.ignore`. If `options.debug` is `true`, you'll receive a warning in the console informing you that this is being done.
 
+### Special note about `options.highlight`, `options.errorClass`, and `options.validClass`
+
+In its default implementation, the jQuery Validation plugin's `options.highlight` function will apply whatever CSS class is defined by your `options.errorClass` if the field input is invalid and whatever CSS class is defined by your `options.validClass` if your field input is valid. In order for this to work for Braintree hosted fields, you _must_ define your errorClass and validClass not only in your CSS but also in the `styles` property of the configuration object passed to `braintree.hostedFields.create`. For example, if your errorClass and validClass are left as the default `error` and `valid`, respectively, then the `styles` property might look something like this:
+
+```javascript
+styles: {
+	'input': {
+		'font-size': '14px',
+		'font-family': 'helvetica, tahoma, calibri, sans-serif',
+		'color': '#3a3a3a'
+	},
+	':focus': {
+		'color': 'black'
+	},
+	'.error': {
+		'color': 'red'
+	},
+	'.valid': {
+		'color': 'green'
+	}
+}
+```
 
 ## License
 Copyright © Nick Bagnall
