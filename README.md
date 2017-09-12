@@ -28,11 +28,11 @@ A bare-bones example:
 		<div class="form-control" id="expiration-year"></div>
 		<div class="form-control" id="postal-code"></div>
 	</form>
-	<script src="https://cdn.jsdelivr.net/jquery/3.2.1/jquery.min.js"></script>
-	<script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.17.0/dist/jquery.validate.min.js"></script>
 	<script src="https://js.braintreegateway.com/web/3.12.1/js/client.js"></script>
 	<script src="https://js.braintreegateway.com/web/3.12.1/js/hosted-fields.js"></script>
-	<script src="https://cdn.jsdelivr.net/braintree-validation/1.0.0/braintree-validation.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/braintree-validation@1.0.0/dist/braintree-validation.min.js"></script>
 	<script>
 		braintree.client.create({
 			authorization: 'YOUR_AUTHORIZATION_KEY_HERE'
