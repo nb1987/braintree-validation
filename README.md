@@ -7,7 +7,7 @@ Note: If you have very particular validation requirements and want to get your h
 
 ## Getting Started
 
-### Downloading the prebuilt files	
+### Downloading the prebuilt files  
 
 ### Downloading the latest changes
 
@@ -21,36 +21,36 @@ Note: If you have very particular validation requirements and want to get your h
 A bare-bones example:
 
 ```javascript
-	<form>
-		<div class="form-control" id="card-number"></div>
-		<div class="form-control" id="cvv"></div>
-		<div class="form-control" id="expiration-month"></div>
-		<div class="form-control" id="expiration-year"></div>
-		<div class="form-control" id="postal-code"></div>
-	</form>
-	<script src="https://cdn.jsdelivr.net/jquery/3.2.1/jquery.min.js"></script>
-	<script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
-	<script src="https://js.braintreegateway.com/web/3.12.1/js/client.js"></script>
-	<script src="https://js.braintreegateway.com/web/3.12.1/js/hosted-fields.js"></script>
-	<script src="https://cdn.jsdelivr.net/braintree-validation/1.0.0/braintree-validation.min.js"></script>
-	<script>
-		braintree.client.create({
-			authorization: 'YOUR_AUTHORIZATION_KEY_HERE'
-		}, function (err, clientInstance) {
-			braintree.hostedFields.create({
-				client: clientInstance,
-				fields: {
-					number: { selector: '#card-number' },
-					cvv: { selector: '#cvv' },
-					expirationMonth: { selector: '#expiration-month' },
-					expirationYear: { selector: '#expiration-year' },
-					postalCode: { selector: '#postal-code' }
-				}
-			}, function (err, hostedFieldsInstance) {
-				braintree.hostedFields.validate(hostedFieldsInstance, {debug: true});
-			});
-		});
-	</script>
+  <form>
+    <div class="form-control" id="card-number"></div>
+    <div class="form-control" id="cvv"></div>
+    <div class="form-control" id="expiration-month"></div>
+    <div class="form-control" id="expiration-year"></div>
+    <div class="form-control" id="postal-code"></div>
+  </form>
+  <script src="https://cdn.jsdelivr.net/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+  <script src="https://js.braintreegateway.com/web/3.12.1/js/client.js"></script>
+  <script src="https://js.braintreegateway.com/web/3.12.1/js/hosted-fields.js"></script>
+  <script src="https://cdn.jsdelivr.net/braintree-validation/1.0.0/braintree-validation.min.js"></script>
+  <script>
+    braintree.client.create({
+      authorization: 'YOUR_AUTHORIZATION_KEY_HERE'
+    }, function (err, clientInstance) {
+      braintree.hostedFields.create({
+        client: clientInstance,
+        fields: {
+          number: { selector: '#card-number' },
+          cvv: { selector: '#cvv' },
+          expirationMonth: { selector: '#expiration-month' },
+          expirationYear: { selector: '#expiration-year' },
+          postalCode: { selector: '#postal-code' }
+        }
+      }, function (err, hostedFieldsInstance) {
+        braintree.hostedFields.validate(hostedFieldsInstance, {debug: true});
+      });
+    });
+  </script>
 ```
 
 braintree-validation is also available on the npm and bower registries:
@@ -94,48 +94,48 @@ You can pass in whatever `rules` and `messages` that you'd like; braintree-valid
 
 ```javascript
 rules: {
-	"braintree-hosted-field-number": {
-		"braintree-hosted-field-number-isRequired": true,
-		"braintree-hosted-field-number-isValid": true
-	},
-	"braintree-hosted-field-cvv": {
-		"braintree-hosted-field-cvv-isRequired": true,
-		"braintree-hosted-field-cvv-isValid": true
-	},
-	"braintree-hosted-field-expirationMonth": {
-		"braintree-hosted-field-expirationMonth-isRequired": true,
-		"braintree-hosted-field-expirationMonth-isValid": true
-	},
-	"braintree-hosted-field-expirationYear": {
-		"braintree-hosted-field-expirationYear-isRequired": true,
-		"braintree-hosted-field-expirationYear-isValid": true
-	},
-	"braintree-hosted-field-postalCode": {
-		"braintree-hosted-field-postalCode-isRequired": true,
-		"braintree-hosted-field-postalCode-isValid": true
-	}
+  "braintree-hosted-field-number": {
+    "braintree-hosted-field-number-isRequired": true,
+    "braintree-hosted-field-number-isValid": true
+  },
+  "braintree-hosted-field-cvv": {
+    "braintree-hosted-field-cvv-isRequired": true,
+    "braintree-hosted-field-cvv-isValid": true
+  },
+  "braintree-hosted-field-expirationMonth": {
+    "braintree-hosted-field-expirationMonth-isRequired": true,
+    "braintree-hosted-field-expirationMonth-isValid": true
+  },
+  "braintree-hosted-field-expirationYear": {
+    "braintree-hosted-field-expirationYear-isRequired": true,
+    "braintree-hosted-field-expirationYear-isValid": true
+  },
+  "braintree-hosted-field-postalCode": {
+    "braintree-hosted-field-postalCode-isRequired": true,
+    "braintree-hosted-field-postalCode-isValid": true
+  }
 },
 messages: {
-	"braintree-hosted-field-number": {
-		"braintree-hosted-field-number-isRequired": "Card number is required.",
-		"braintree-hosted-field-number-isValid": "Please enter a valid card number."
-	},
-	"braintree-hosted-field-cvv": {
-		"braintree-hosted-field-cvv-isRequired": "CVV is required.",
-		"braintree-hosted-field-cvv-isValid": "Please enter a valid CVV."
-	},
-	"braintree-hosted-field-expirationMonth": {
-		"braintree-hosted-field-expirationMonth-isRequired": "Expiration month is required.",
-		"braintree-hosted-field-expirationMonth-isValid": "Please enter a valid expiration month."
-	},
-	"braintree-hosted-field-expirationYear": {
-		"braintree-hosted-field-expirationYear-isRequired": "Expiration year is required.",
-		"braintree-hosted-field-expirationYear-isValid": "Please enter a valid expiration year."
-	},
-	"braintree-hosted-field-postalCode": {
-		"braintree-hosted-field-postalCode-isRequired": "Postal code is required.",
-		"braintree-hosted-field-postalCode-isValid": "Please enter a valid postal code."
-	}
+  "braintree-hosted-field-number": {
+    "braintree-hosted-field-number-isRequired": "Card number is required.",
+    "braintree-hosted-field-number-isValid": "Please enter a valid card number."
+  },
+  "braintree-hosted-field-cvv": {
+    "braintree-hosted-field-cvv-isRequired": "CVV is required.",
+    "braintree-hosted-field-cvv-isValid": "Please enter a valid CVV."
+  },
+  "braintree-hosted-field-expirationMonth": {
+    "braintree-hosted-field-expirationMonth-isRequired": "Expiration month is required.",
+    "braintree-hosted-field-expirationMonth-isValid": "Please enter a valid expiration month."
+  },
+  "braintree-hosted-field-expirationYear": {
+    "braintree-hosted-field-expirationYear-isRequired": "Expiration year is required.",
+    "braintree-hosted-field-expirationYear-isValid": "Please enter a valid expiration year."
+  },
+  "braintree-hosted-field-postalCode": {
+    "braintree-hosted-field-postalCode-isRequired": "Postal code is required.",
+    "braintree-hosted-field-postalCode-isValid": "Please enter a valid postal code."
+  }
 }
 ```
 
@@ -161,20 +161,20 @@ In its default implementation, the jQuery Validation plugin's `options.highlight
 
 ```javascript
 styles: {
-	'input': {
-		'font-size': '14px',
-		'font-family': 'helvetica, tahoma, calibri, sans-serif',
-		'color': '#3a3a3a'
-	},
-	':focus': {
-		'color': 'black'
-	},
-	'.error': {
-		'color': 'red'
-	},
-	'.valid': {
-		'color': 'green'
-	}
+  'input': {
+    'font-size': '14px',
+    'font-family': 'helvetica, tahoma, calibri, sans-serif',
+    'color': '#3a3a3a'
+  },
+  ':focus': {
+    'color': 'black'
+  },
+  '.error': {
+    'color': 'red'
+  },
+  '.valid': {
+    'color': 'green'
+  }
 }
 ```
 
